@@ -1,19 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { RiderService } from './rider.service';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller('rider')
 export class RiderController {
   constructor(private readonly riderService: RiderService) {}
 
-  @Get(':id')
-  getRiderById(
-    @Param()
-    params: any,
-  ) {
+  //@Get(':id')
+  @MessagePattern({ cmd: 'get-rider' })
+  getRiderById(@Payload() data: { id: string }) {
     return {
-      _id: params.id,
+      _id: data.id,
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@gmail.com',
