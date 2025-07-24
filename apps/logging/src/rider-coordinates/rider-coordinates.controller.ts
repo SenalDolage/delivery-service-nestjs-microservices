@@ -7,12 +7,12 @@ export class RiderCoordinatesController {
   constructor(private coordinatsService: RiderCoordinatesService) {}
 
   @Get()
-  getRiderCoordinates() {
-    return 'Hellow i am from rider coordinates';
+  async getRiderCoordinates() {
+    return this.coordinatsService.getRiderCoordinates();
   }
 
   @Post()
-  saveRiderCoordinates(
+  async saveRiderCoordinates(
     @Body()
     createCoordinateDTO: CreateCoordinatesDTO,
   ) {
